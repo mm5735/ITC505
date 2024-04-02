@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doraemon Game</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('doremon.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .adventure-box {
+            background-color: rgba(255, 223, 186, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 60%;
+            max-width: 400px;
+        }
+
+        header {
+            text-align: center;
+            background-color: #3d85c6;
+            padding: 15px 0;
+            text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin: 0;
+            color: #f9f9f9;
+        }
+
+        .story {
+            padding: 15px;
+            text-align: center;
+        }
+
+        #story-text {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .choices {
+            display: flex;
+            justify-content: space-around;
+            margin: 15px;
+        }
+
+        .choices button {
+            padding: 12px 24px;
+            font-size: 16px;
+            background-color: #ff8c42;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .choices button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .image {
+            text-align: center;
+            padding: 15px;
+        }
+
+        #doremon-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="adventure-box">
+            <header>
+                <h1>Doraemon Game</h1>
+            </header>
+            <div class="story">
+                <p id="story-text">Nobita wants to go to Shizuka's house. There are two ways, left and right. Which way will Nobita choose?</p>
+            </div>
+            <div class="choices">
+                <button id="choice1">Left way</button>
+                <button id="choice2">Right way</button>
+            </div>
+            <div class="image">
+                <img id="doremon-image">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let story = {
+            start: {
+                text: "Nobita wants to go to Shizuka's house. There are two ways, left and right. Which way will Nobita choose?",
+                choices: {
+                    "Left way": "left",
+                    "Right way": "right"
+                },
+                image: "n1.jpg"
+            },
+            left: {
+                text: "Nobita chooses the left way and meets Doraemon and Gian. Whom will Nobita listen to?",
+                choices: {
+                    "Doraemon": "doremon1",
+                    "Gian": "gian1"
+                },
+                image: "n2.jpg"
+            },
+            doremon1: {
+                text: "Doraemon says to do homework. Will Nobita do homework or go to Shizuka?",
+                choices: {
+                    "Do homework": "homework1",
+                    "Go to Shizuka": "sizuka1"
+                },
+                image: "n3.jpg"
+            },
+            gian1: {
+                text: "Gian said to play cricket with him. Will Nobita play cricket or not?",
+                choices: {
+                    "Play cricket": "cricket1",
+                    "Don't play cricket": "nocricket"
+                },
+                image: "n4.jpg"
+            },
+            homework1: {
+                text: "Nobita was busy with homework and can't meet Shizuka.",
+                choices: {},
+                image: "nobithasad.jpg"
+            },
+            sizuka1: {
+                text: "Nobita ignores Doraemon and went to Shizuka's home.",
+                choices: {},
+                image: "nobithahappy.jpg"
+            },
+            cricket1: {
+                text: "Nobita plays cricket and meets Shizuka after the game.",
+                choices: {},
+                image: "nobithahappy.jpg"
+            },
+            nocricket: {
+                text: "Nobita says no to Gian, Gian got angry and beat Nobita.",
+                choices: {},
+                image: "nobithasad.jpg"
+            },
+            right: {
+                text: "Nobita chooses the right way and meets Suneo and Nobita's mom. Whom will Nobita talk to?",
+                choices: {
+                    "Suneo": "sunio1",
+                    "Mom": "mom1"
+                },
+                image: "n5.jpg"
+            },
+            sunio1: {
+                text: "Suneo told Nobita to play with his remote control car. Will Nobita play with Suneo or not?",
+                choices: {
+                    "Play with car": "car1",
+                    "Don't play with car": "notplay1"
+                },
+                image: "n8.jpg"
+            },
+            mom1: {
+                text: "Nobita's mom says to go home. Will Nobita listen to his mom or not?",
+                choices: {
+                    "Yes": "momyes",
+                    "No": "momno"
+                },
+                image: "n9.jpg"
+            },
+            car1: {
+                text: "Suneo didn't give his remote control car to Nobita, and Nobita didn't go to Shizuka's house?",
+                choices: {},
+                image: "nobithasad.jpg"
+            },
+            notplay1: {
+                text: "Nobita didn't play with Suneo, went to Shizuka's house, and played with Shizuka.",
+                choices: {},
+                image: "nobithahappy.jpg"
+            },
+            momyes: {
+                text: "Nobita went home and can't meet Shizuka.",
+                choices: {},
+                image: "nobithasad.jpg"
+            },
+            momno: {
+                text: "Nobita says no to his mom and went to Shizuka's home.",
+                choices: {},
+                image: "nobithahappy.jpg"
+            }
+        };
+
+        let currentStage = "start";
+
+        function updatePage() {
+            let stage = story[currentStage];
+            document.getElementById("story-text").innerText = stage.text;
+            document.getElementById("doremon-image").src = stage.image;
+
+            let choicesDiv = document.querySelector('.choices');
+            choicesDiv.innerHTML = '';
+
+            for (let choice in stage.choices) {
+                if (stage.choices.hasOwnProperty(choice)) {
+                    let button = document.createElement('button');
+                    button.innerText = choice;
+                    button.addEventListener('click', function () {
+                        currentStage = stage.choices[choice];
+                        updatePage();
+                    });
+
+                    choicesDiv.appendChild(button);
+                }
+            }
+        }
+
+        updatePage();
+    </script>
+</body>
+<footer>
+        <p>Last updated: 
+            <span id="lastModified"></span>
+        </p>
+    </footer>
+    <script type="text/javascript">
+         var x = document.lastModified;
+         document.getElementById('lastModified').textContent = x;
+    </script>
+</html>
+    <div>
+        <h2>Addendum: Development Process and Insights</h2>
+        <p>Developing this Doraemon-themed interactive story involved several creative choices and challenges:</p>
+        <ul>
+            <li><strong>Theme Selection:</strong> Choosing Doraemon as the theme was a deliberate decision to appeal to a wide audience, especially fans of the popular character.</li>
+            <li><strong>Storyline Creation:</strong> Crafting a branching storyline with multiple choices required careful planning to ensure coherence and engagement throughout the narrative.</li>
+            <li><strong>Image Selection:</strong> Selecting appropriate images to accompany each story stage was essential for visual storytelling and immersion.</li>
+            <li><strong>UI/UX Design:</strong> Designing the user interface for the story box involved considerations for readability, aesthetics, and ease of interaction.</li>
+            <li><strong>JavaScript Implementation:</strong> Implementing the logic for updating story stages and handling user choices posed technical challenges, especially in managing state transitions.</li>
+        </ul>
+        <p>Throughout the development process, insights were gained:</p>
+        <ul>
+            <li><strong>User Engagement:</strong> Interactive storytelling offers an engaging user experience, encouraging active participation and investment in the narrative outcome.</li>
+            <li><strong>Iterative Refinement:</strong> Iterative testing and refinement were crucial for enhancing the story's flow, addressing bugs, and improving overall user experience.</li>
+            <li><strong>Creative Freedom:</strong> Embracing creative freedom allowed for the exploration of diverse narrative paths and outcomes, enriching the storytelling experience.</li>
+            <li><strong>Community Feedback:</strong> Soliciting feedback from users provided valuable insights for further enhancements and future iterations of the interactive story.</li>
+        </ul>
+        <p>In conclusion, developing this Doraemon-themed interactive story was a rewarding endeavor that required a combination of creative vision, technical skill, and iterative refinement. By overcoming challenges and embracing insights gained along the way, the project achieved its goal of delivering an engaging and memorable storytelling experience.</p>
+    </div>
+</body>
+</html>
