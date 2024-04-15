@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+ <footer>
+        <p>Last updated: 
+            <span id="lastModified"></span>
+        </p>
+    </footer>
+    <script type="text/javascript">
+         var x = document.lastModified;
+         document.getElementById('lastModified').textContent = x;
+    </script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mad Libs</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: url('Mad_lib.jpg') center center fixed; 
+            background-size: cover;
+            color: #383; /* Changed font color */
+        }
+
+        h1 {
+            text-align: left;
+            color: #2E57; /* Changed heading color */
+            font-style: italic; /* Added italic font style */
+        }
+
+        form {
+            max-width: 500px;
+            margin: 0; /* Adjusted margin to shift form to the left */
+            background-color: rgba(295, 255, 255, 0.8); 
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 50px; 
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            color: red; 
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: blue; 
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #4a049;
+        }
+
+        #madLibResult {
+            margin-top: 20px; 
+        }
+
+        .addendum {
+            color: #555; /* Changed addendum font color */
+            font-style: italic; /* Added italic font style */
+        }
+    </style>
+</head>
+<body>
+    <h1><u>Mad</u> <u>Libs</u> <u></u></h1>
+        <form id="madLibForm">
+        <label for="adverb">Adverb:</label>
+        <input type="text" id="adverb" name="adverb" required>
+
+        <label for="pluralNoun">Plural Noun:</label>
+        <input type="text" id="pluralNoun" name="pluralNoun" required>
+
+        <label for="verb">Verb:</label>
+        <input type="text" id="verb" name="verb" required>
+
+        <label for="adjective">Adjective:</label>
+        <input type="text" id="adjective" name="adjective" required>
+
+        <label for="noun">Noun (singular):</label>
+        <input type="text" id="noun" name="noun" required>
+
+        <button type="button" onclick="generateMadLib()">Generate Mad Lib</button>
+    </form>
+    
+    <div id="madLibANS"></div>
+
+    <!-- Addendum section -->
+    <div class="addendum">
+    <h2>Addendum</h2>
+    <p>
+        The creation of this Mad Libs game involved a meticulous process aimed at delivering an interactive and captivating experience for users of all ages.
+    </p>
+    <p>
+        Firstly, the HTML structure was meticulously crafted to offer a seamless and intuitive user interface. 
+		This entailed designing input fields catering to various word types, including adverbs, plural nouns, verbs, adjectives, and singular nouns. 
+		These fields enable users to contribute their words based on specific criteria, thereby personalizing their Mad Lib experience.
+    </p>
+    <p>
+        Secondly, a sophisticated JavaScript function was developed to dynamically generate the Mad Libs based on the user's inputs. This function randomly selects a sentence template from an array and substitutes the placeholders with the user-provided words, resulting in a distinct Mad Lib each time. The integration of this function adds an element of unpredictability and excitement to the game.
+    </p>
+    <p>
+        Furthermore, meticulous attention was devoted to CSS styling to elevate the visual appeal of the game. This involved fine-tuning font styles, optimizing form layout, refining button design, and curating background imagery. These aesthetic enhancements contribute to creating an immersive and cohesive experience that captivates the user's attention.
+    </p>
+    <p>
+        Lastly, the footer serves as a testament to our commitment to transparency and user engagement. By displaying the last modified date of the document, users are provided with valuable information about the document's currency, ensuring that they are always informed about the latest updates and revisions.
+    </p>
+    <p>
+        In summary, the development process of this Mad Libs game was characterized by a harmonious integration of HTML structure, JavaScript functionality, CSS styling, and meticulous document management. The result is an entertaining and engaging Mad Libs game that offers users an opportunity to unleash their creativity and enjoy countless moments of laughter and amusement.
+    </p>
+</div>
+
+
+    <script>
+       const madLibSentences = [
+    "Once upon a time, there was a ${adjective} ${noun} who loved to ${verb} in the enchanted forest. One day, they stumbled upon a treasure chest filled with ${pluralNoun} and decided to ${adverb} share it with the villagers.",
+    "In a mystical kingdom, a ${adjective} wizard patiently waited in his tower for a brave adventurer to ${verb} and help him defeat the evil ${noun}. Little did he know, the adventurer possessed a fear of ${pluralNoun}!",
+    "The talented ${adjective} artist transformed a ${noun} into a masterpiece with a stroke of his brush. The entire gallery marveled at the ${adverb} transformation.",
+    "On a sunny afternoon, a group of ${pluralNoun} decided to ${verb} to the top of the ${adjective} hill. The view was breathtaking, and they laughed ${adverb} while enjoying the scenery.",
+    "Sitting on the doorstep, the curious ${adjective} puppy watched the world go by. Suddenly, it spotted a ${noun} and gleefully ${verb} after it, causing a playful commotion.",
+    "In a futuristic society, ${pluralNoun} had advanced ${adjective} abilities. They could ${verb} with incredible precision and communicate using ${adverb} state-of-the-art technology."
+];
+
+
+       function generateMadLib() {
+    const adverb = document.getElementById('adverb').value;
+    const pluralNoun = document.getElementById('pluralNoun').value;
+    const verb = document.getElementById('verb').value;
+    const adjective = document.getElementById('adjective').value;
+    const noun = document.getElementById('noun').value;
+
+    if (adverb && pluralNoun && verb && adjective && noun) {
+        const randomIndex = Math.floor(Math.random() * madLibSentences.length);
+        const madLibSentence = madLibSentences[randomIndex];
+
+        const madLib = madLibSentence
+            .replace("${adverb}", adverb)
+            .replace("${pluralNoun}", pluralNoun)
+            .replace("${verb}", verb)
+            .replace("${adjective}", adjective)
+            .replace("${noun}", noun);
+
+        document.getElementById('madLibANS').innerHTML = `<h2>Result of your Mad Lib:</h2><p>${madLib}</p>`;
+
+        document.getElementById('madLibForm').reset();
+    } else {
+        alert("Please fill in all the fields before generating the Mad Lib.");
+    }
+}
+
+
+        var x = document.lastModified;
+        document.getElementById('lastModified').textContent = x;
+    </script>
+</body>
+</html>
