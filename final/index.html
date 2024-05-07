@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lights Out Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<footer>
+        <p>Last updated: 
+            <span id="lastModified"></span>
+        </p>
+    </footer>
+    <script type="text/javascript">
+         var x = document.lastModified;
+         document.getElementById('lastModified').textContent = x;
+    </script>
+<body>
+    <h1 id="h1-title">Lights Out</h1>
+    <div id="game-container"></div>
+    <button id="solution-btn" onclick="showSolution()">Show Solution</button>
+    <div id="solution">💡</div>
+
+    <div id="addendum">
+        <h3>Addendum:</h3>
+        <ul>
+            <li>
+                The Lights Out game is implemented using a 5x5 grid. To ensure solvability, the game starts with an empty grid, then randomly activates lights one at a time. Each light toggles its state as well as the adjacent lights above, below, to the left, and to the right. This process is reversible, allowing the creation of a step-by-step solution.
+            </li>
+            <li>
+                The game logic dynamically updates the board state in response to user actions. This includes toggling the lights on and off and updating the HTML representation of the game board via JavaScript.
+            </li>
+            <li>
+                The CSS styles for the game cells are designed to reflect the game's mechanics. Each cell's background color indicates its current state: white for on and black for off.
+            </li>
+            <li>
+                Additionally, upon winning the game, the cells display random colors to indicate the victory position. An alert notifies the player of their success, providing a satisfying conclusion to the game experience.
+            </li>
+        </ul>
+    </div>
+    <script src="script.js"></script>
+
+</body>
+
+</html>
